@@ -1,33 +1,33 @@
 import './styles.css';
 import createStore from './create-store';
-
-const reducer = (st, act) => {
-    // const state = state;
-    if (act === 'add') {
-        state.counter = ++st.counter;
-    } else if (act === 'sub') {
-        state.counter == --st.counter;
-    }
-    return state;
-};
-
-const store = createStore(reducer, {counter: 0});
-
-store.subscribe(render);
+import rootReducer from './redux/rootReducer';
 
 const counter = document.getElementById('counter');
 const addBtn = document.getElementById('add');
 const subBtn = document.getElementById('sub');
 const asyncBtn = document.getElementById('async');
 
+const store = createStore(rootReducer, 0);
+
+/* Subscribers - start */
+const render = () => {
+   counter.innerText = store.getState();
+};
+const print = () => {
+   console.log(store.getState());
+}
+/* Subscribers - end */
+
+store.subscribe(render);
+store.subscribe(print);
+
+// Init App (first rendering)
+store.dispatch('INIT_APPLICATION');
+
 addBtn.addEventListener('click', () => {
-    store.dispatch('add');
+    store.dispatch({ type: 'ADD' });
 });
 
 subBtn.addEventListener('click', () => {
-    store.dispatch('sub');
+    store.dispatch({ type: 'SUB' });
 });
-
-const render = () => {
-    counter.innerText = store.getState().counter;
-}
