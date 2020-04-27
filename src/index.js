@@ -2,6 +2,7 @@ import './styles.css'
 import { createStore } from 'redux'
 import rootReducer from './redux/rootReducer'
 import { INIT_APP, ADD_COUNT, SUB_COUNT } from './redux/actionTypes'
+import createAction from './redux/actionCreator'
 
 const counter = document.getElementById('counter')
 const addBtn = document.getElementById('add')
@@ -24,12 +25,12 @@ store.subscribe(render)
 store.subscribe(print)
 
 // Init App (first rendering)
-store.dispatch({ type: INIT_APP })
+store.dispatch(createAction(INIT_APP))
 
 addBtn.addEventListener('click', () => {
-    store.dispatch({ type: ADD_COUNT })
+    store.dispatch(createAction(ADD_COUNT))
 })
 
 subBtn.addEventListener('click', () => {
-    store.dispatch({ type: SUB_COUNT })
+    store.dispatch(createAction(SUB_COUNT))
 })
