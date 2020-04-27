@@ -1,7 +1,7 @@
 function rootReducer(state, action) {
-   if (action.type === 'ADD') {
+   if (action.type === 'INCREMENT') {
        state++;
-   } else if (action.type === 'SUB') {
+   } else if (action.type === 'DECREMENT') {
        state--;
    }
    return state;
